@@ -1,14 +1,9 @@
-# Third-party libraries
+# Third-party mapping libraries and tools
 
-The website bundles existing JavaScript/CSS dependencies locally, so visitors
-can load the published map without a CDN or external mapping service.
+The application ships its own dependencies at the repository root. The hosted page does not require external CDNs or commercial map tiles.
 
-- **OpenLayers** (`resources/ol.js`, `resources/ol.css`) — OpenLayers v10.7.0,
-  BSD-2-Clause licence. Source/licence: https://github.com/openlayers/openlayers
-- **Proj4js** (`resources/proj4.js`) — Proj4js v2.5.0,
-  MIT licence. Source/licence: https://github.com/proj4js/proj4js
-- **Source workflow** — spatial data obtained with QuickOSM/QGIS and first
-  exported using qgis2web, then adapted into the current OpenLayers page.
+- **OpenLayers:** `ol.js`, `ol.css` — OpenLayers v10.7.0, BSD-2-Clause; https://github.com/openlayers/openlayers
+- **Proj4js:** `proj4.js` — Proj4js v2.5.0, MIT; https://github.com/proj4js/proj4js
+- **Data workflow:** OpenStreetMap data via QuickOSM/QGIS and qgis2web, with subsequent customized OpenLayers code.
 
-Use and redistribution of these libraries remain governed by their respective
-licences. Map data licensing is documented separately in `DATA_LICENSE.md`.
+Each third-party component remains subject to its own licence. The OpenStreetMap database licence is addressed in `DATA_LICENSE.md`.

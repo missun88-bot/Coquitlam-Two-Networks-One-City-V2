@@ -1,96 +1,46 @@
-# Two Networks, One City — Coquitlam, BC
+# Two Networks, One City — Coquitlam, BC | Version 2
 
 **Faster through the city. Further into its landscape.**
 
-A two-panel interactive map comparing Coquitlam's roads and mapped pedestrian
-paths. Pan or zoom either map and the other follows, showing two ways to
-experience the same place: roads that move people across the city and paths
-that lead into parks, trails, creeks and the mountain landscape.
+An interactive 2026 **#30DayMapChallenge / OpenStreetMap** visualization, designed and developed by **Iris Sun**. It contrasts Coquitlam’s road network with mapped pedestrian paths, from neighbourhood streets toward parks, forested slopes and mountain trails.
 
-**Designed and developed by Iris Sun**  
-**#30DayMapChallenge 2026 · OpenStreetMap theme**
+![Compare networks, the default two-map mode](preview-compare.png)
 
-## Explore the visualization
+## What’s in Version 2
 
-- **City for Vehicles** — streets classified by OpenStreetMap road category,
-  with graduated orange line weights and labels for major named roads on zoom.
-- **City for People** — turquoise mapped footways, paths, pedestrian ways and
-  steps, including routes beyond the vehicle street network.
-- **Synchronized views** — pan/zoom either map; both use the same view and
-  **EPSG:3347 / NAD83 Statistics Canada Lambert** projection.
-- **Interactive identification** — hover a line, or tap on a touchscreen, to
-  see the recorded OSM name and path/road type. Many pedestrian ways have no
-  recorded OSM name, even beside a named road.
-- **Responsive** — side by side on larger screens; stacked on mobile.
+- **Compare networks (default):** two side-by-side synchronized maps, one for vehicle roads and one for mapped pedestrian paths
+- **Explore together:** a larger single map showing the two networks overlaid, with separate show/hide controls; its initial view fits the larger canvas
+- Graduated road weights based on OpenStreetMap road classifications, major-road labels at closer zoom levels, and name/type hover or tap tooltips
+- Responsive desktop/mobile design, matching map navigation, original storytelling and credits
+- **Statistics Canada Lambert (EPSG:3347)**, with OpenLayers and Proj4 packaged locally (no external tile service or CDN required)
 
-The contrasts are interpretive: line width reflects OSM road class, not actual
-traffic volume or width; the pathways layer is not a complete pedestrian
-network or a measured walking-distance analysis.
+![Explore Together: the enlarged combined view](preview-together.png)
 
-## Publish with GitHub Pages
+## Publish as a NEW GitHub Pages site (keep Version 1 untouched)
 
-1. Create a **public** repository, e.g. `coquitlam-two-networks`.
-2. Upload **all the files and folders in this repository package**, with
-   `index.html` in the repository root (not inside an extra enclosing folder).
-3. Open your repository's **Settings → Pages**.
-4. Set **Source: Deploy from a branch**, **Branch: `main`**, and **Folder: `/(root)`**; save.
-5. After GitHub finishes deploying, visit
-   `https://YOUR-USERNAME.github.io/coquitlam-two-networks/` (replace username
-   and repository name as appropriate).
+1. On GitHub, create a **new public repository** named `coquitlam-two-networks-v2`. Do **not** edit, rename, delete or upload files to `coquitlam-two-networks` (your V1 repository).
+2. Extract `Coquitlam_Two_Networks_V2_GitHub_Pages.zip` on your computer.
+3. Open the *extracted folder*, select **all its contents** (including `index.html`, `vehicles.js`, `walking.js`, `ol.js`, `proj4.js`, `ol.css`, `.nojekyll`, and the documents), and upload them to the **root of the new V2 repository**. Do not upload a ZIP into the repository or put all website files under another folder.
+4. Commit the new files to the `main` branch.
+5. Go to **Settings → Pages → Build and deployment**. Set Source to **Deploy from a branch**, choose branch **main**, folder **/(root)**, then Save.
+6. After deployment completes, open:
 
-There is **no build step** and no need for a server-side GIS service.
-The checked-in `.nojekyll` file allows these ready-made static assets to be
-served directly.
+   `https://missun88-bot.github.io/coquitlam-two-networks-v2/`
 
-## Test locally
+7. Check **Compare networks** (the default), switch to **Explore together**, try the road/path checkboxes, zoom/pan, road labels, tooltips, and then switch back.
 
-From the extracted repository folder, double-click `index.html` to open it in
-Edge or Chrome. If a browser blocks local loading, start a local web server:
+**V1 remains at:** https://missun88-bot.github.io/coquitlam-two-networks/ — it is entirely separate and is not part of this deployment.
 
-```powershell
-py -m http.server 8000 --bind 127.0.0.1
-```
+## Files
 
-Then visit http://127.0.0.1:8000/ . This package bundles all map dependencies
-and geographic data locally; no live basemap tile requests are needed.
+All runtime files sit at repository root. This is intentional: `index.html` references `ol.css`, `proj4.js`, `ol.js`, `vehicles.js`, and `walking.js` directly. Page-specific CSS and JavaScript are bundled inside `index.html` so the view selector and matching map logic deploy together.
 
-## What's in the repository
+`preview-compare.png` and `preview-together.png` are optional screenshots used in this README. `DATA_LICENSE.md` documents OSM reuse obligations; `THIRD_PARTY_NOTICES.md` covers bundled libraries. `.nojekyll` disables Jekyll processing.
 
-```text
-index.html                 Main page, story, credits and map containers
-styles.css                 Responsive layout and typography
-app.js                     OpenLayers maps, labels, tooltips and interaction
-data/
-  vehicles.js              OSM-derived road geometries and attributes
-  walking.js               OSM-derived pedestrian geometries and attributes
-resources/
-  ol.js / ol.css           Local OpenLayers library
-  proj4.js                 Local projection support
-.nojekyll                  GitHub Pages static publishing
-DATA_LICENSE.md            OpenStreetMap data licence/attribution
-THIRD_PARTY_NOTICES.md     External dependency notices
-```
+## Credits and caveats
 
-## Editing after publication
+**Designer and developer:** Iris Sun. **Mapping tools:** QGIS, QuickOSM, qgis2web, OpenLayers, Proj4js. **Geographic data:** © OpenStreetMap contributors, ODbL 1.0. **Projection:** Statistics Canada Lambert / EPSG:3347.
 
-- **Text, footer and content:** `index.html`
-- **Fonts, legend, layout:** `styles.css`
-- **Road hierarchy:** `roadTypes` in `app.js`
-- **Road-label thresholds:** `labelResolution` in `app.js` (map metres/pixel;
-  lower numbers mean labels wait until further zoom-in)
-- **Map tooltip behaviour:** `attachInspector` in `app.js`
+Line width shows road *classification*, not measured speed, width or traffic. The pedestrian network includes paths recorded in OSM and is not a complete inventory of every sidewalk or legally accessible walking route. Names appear only where recorded in OSM.
 
-Keep the `data/` and `resources/` folders alongside `index.html`. Edits here
-will not change the original QGIS GeoPackage/project; keep the QGIS source
-separately if you plan to re-export.
-
-## Credits and licensing
-
-- Design and development: **Iris Sun**
-- Map data: **© OpenStreetMap contributors**, ODbL 1.0 —
-  https://www.openstreetmap.org/copyright
-- Geographic workflow: **QGIS · QuickOSM · qgis2web**
-- Web mapping: **OpenLayers · Proj4js**
-- Projection: **EPSG:3347 — NAD83 / Statistics Canada Lambert**
-
-See [data licensing](DATA_LICENSE.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
+This release builds on the previously tested V2.2 implementation but is packaged and documented as a separate **Version 2 website**. No changes have been made to the V1 GitHub repository.
